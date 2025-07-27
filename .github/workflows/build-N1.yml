@@ -125,9 +125,10 @@ jobs:
       - name: Debug workspace contents
         run: ls -R
 
-      - name: 处理是否替换banner信息
-        if: ${{ github.event.inputs.replace_banner == 'true' }}
+      - name: 处理是否替换 banner 信息
+        if: ${{ github.event.inputs.skip_imagebuilder == 'false' && github.event.inputs.replace_banner == 'true' }}
         run: |
+          # 使用ImageBuilder构建 且用户勾选了替换banner时
           cp n1/99-banner.sh files/etc/uci-defaults/
       
       - name: Building N1 ImmortalWrt rootfs
